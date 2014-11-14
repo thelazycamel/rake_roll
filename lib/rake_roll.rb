@@ -1,4 +1,3 @@
-require "version"
 require "rake"
 require "rake_roll/version"
 require "rake_roll/roller"
