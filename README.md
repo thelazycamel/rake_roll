@@ -18,7 +18,22 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+rake roll
+
+rake roll                        # current version 0.1.0 and options
+rake roll:bump:pre               # Bump to 0.1.0a
+rake roll:bump                   # Bump to 0.1.1
+rake roll:bump:major             # Bump to 1.0.0
+rake roll:bump:minor             # Bump to 0.2.0
+
+The above will do a dry run, and show the changelog updates in the
+terminal window
+
+run the command with push to update the version, changelog and push
+everything up on the current branch of the git repo
+
+i.e.
+rake roll:bump PUSH=true
 
 ## Contributing
 
