@@ -26,6 +26,9 @@ module RakeRoll
       puts "----------------------"
       puts "CHANGELOG"
       puts parsed_git_log
+      if parsed_git_log.empty?
+        puts "WARNING: no new CHANGELOG commits added"
+      end
       puts "----------------------"
     end
 

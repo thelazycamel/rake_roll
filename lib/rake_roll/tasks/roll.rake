@@ -5,72 +5,76 @@ task :roll => :environment do
   puts "rake roll options are:"
   puts "----------------------"
   puts "rake roll:bump            #{roller.current_version} => #{version.bump}"
-  puts "rake roll:bump:pre        #{roller.current_version} => #{version.pre}"
-  puts "rake roll:bump:minor      #{roller.current_version} => #{version.minor}"
-  puts "rake roll:bump:major      #{roller.current_version} => #{version.major}"
+  puts "rake roll:pre             #{roller.current_version} => #{version.pre}"
+  puts "rake roll:minor           #{roller.current_version} => #{version.minor}"
+  puts "rake roll:major           #{roller.current_version} => #{version.major}"
   puts "----------------------"
   puts "Above will do a dry run, Run with PUSH=true to run for real"
+  puts "----------------------"
+  puts RakeRoll::Never.new.line
   roller.log_to_s
 end
 
 desc "bump the version, update the tag and changelog"
 namespace :roll do
 
-  desc "0.1.0 => 0.1.1"
+  desc "#{RakeRoll::Roller.new.current_version} => #{RakeRoll::Version.new(RakeRoll::Roller.new.current_version).bump}"
   task :bump => :environment do
     roller = RakeRoll::Roller.new
     version = RakeRoll::Version.new(roller.current_version)
-    roller.new_version = version.bump
-    roller.print_versions
-    if ENV["PUSH"]
-      roller.push
+    if version
+      roller.new_version = version.bump
+      do_your_thing(roller, version, "bump")
     else
-      roller.print_run_for_real_text("bump")
+      puts "ERROR: Invalid Version Number #{roller.current_version}"
     end
   end
 
-  namespace :bump do
-
-    desc "0.1.0 => 1.0.0"
-    task :major => :environment do
-      roller = RakeRoll::Roller.new
-      version = RakeRoll::Version.new(roller.current_version)
+  desc "#{RakeRoll::Roller.new.current_version} => #{RakeRoll::Version.new(RakeRoll::Roller.new.current_version).major}"
+  task :major => :environment do
+    roller = RakeRoll::Roller.new
+    version = RakeRoll::Version.new(roller.current_version)
+    if version
       roller.new_version = version.major
-      roller.print_versions
-      if ENV["PUSH"]
-        roller.push
-      else
-        roller.print_run_for_real_text("bump:major")
-      end
+      do_your_thing(roller, version, "major")
+    else
+      puts "ERROR: Invalid Version Number #{roller.current_version}"
     end
+  end
 
-    desc "0.1.0 => 0.2.0"
-    task :minor => :environment do
-      roller = RakeRoll::Roller.new
-      version = RakeRoll::Version.new(roller.current_version)
+  desc "#{RakeRoll::Roller.new.current_version} => #{RakeRoll::Version.new(RakeRoll::Roller.new.current_version).minor}"
+  task :minor => :environment do
+    roller = RakeRoll::Roller.new
+    version = RakeRoll::Version.new(roller.current_version)
+    roller.new_version = version.minor
+    if version
       roller.new_version = version.minor
-      roller.print_versions
-      if ENV["PUSH"]
-        roller.push
-      else
-        roller.print_run_for_real_text("bump:minor")
-      end
+      do_your_thing(roller, version, "minor")
+    else
+      puts "ERROR: Invalid Version Number #{roller.current_version}"
     end
+  end
 
-    desc "0.1.0 => 0.1.1a"
-    task :pre => :environment do
-      roller = RakeRoll::Roller.new
-      version = RakeRoll::Version.new(roller.current_version)
+  desc "#{RakeRoll::Roller.new.current_version} => #{RakeRoll::Version.new(RakeRoll::Roller.new.current_version).pre}"
+  task :pre => :environment do
+    roller = RakeRoll::Roller.new
+    version = RakeRoll::Version.new(roller.current_version)
+    roller.new_version = version.pre
+    if version
       roller.new_version = version.pre
-      roller.print_versions
-      if ENV["PUSH"]
-        roller.push
-      else
-        roller.print_run_for_real_text("bump:pre")
-      end
+      do_your_thing(roller, version, "pre")
+    else
+      puts "ERROR: Invalid Version Number #{roller.current_version}"
     end
-
   end
 
 end
 
+def do_your_thing(roller, version, type)
+    roller.print_versions
+    if ENV["PUSH"]
+      roller.push
+    else
+      roller.print_run_for_real_text(type)
+    end
+end
