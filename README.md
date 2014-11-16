@@ -52,6 +52,12 @@ Or install it yourself as:
     * Feature: #1111 Adding rake_roll to the Gemfile
     * HotFix: Don't Delete current users
 
+  TODO
+
+    Write tests
+    Write RDocs
+    Code Tidy
+
 ## Contributing
 
 1. Fork it ( http://github.com/<my-github-username>/rake_roll/fork )
