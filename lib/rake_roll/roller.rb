@@ -11,7 +11,12 @@ module RakeRoll
     end
 
     def current_version
-      @current_version ||= File.read("VERSION").chomp
+      return @current_version if @current_version
+      if File.exist?("VERSION")
+        File.read("VERSION").chomp
+      else
+        build_version
+      end
     end
 
     def current_branch
@@ -34,7 +39,7 @@ module RakeRoll
 
     def print_run_for_real_text(type)
       log_to_s
-      puts "=> rake run:#{type} PUSH=true (to run for real)"
+      puts "=> rake roll:#{type} PUSH=true (to run for real)"
       puts "----------------------"
     end
 
@@ -60,6 +65,7 @@ module RakeRoll
       commit_changes
       update_tag
       push_tag_and_branch
+      puts RakeRoll::Never.new.line
     end
 
     private
@@ -88,7 +94,7 @@ module RakeRoll
 
     def commit_changes
       puts "committing changes"
-      system('git commit -a -m "Updating Version to #{new_version}"')
+      system("git commit -a -m 'Updating Version to #{new_version}'")
     end
 
     def update_tag
@@ -108,6 +114,14 @@ module RakeRoll
     def git_log(tag=nil)
       tag ||= current_branch
       `git log #{current_version}..#{tag} #{format}`
+    end
+
+    def build_version
+      File.open("VERSION", "w") {|f| f.write("0.0.1") }
+      File.open("CHANGELOG", "w") {|f| f.write("0.0.1") } unless File.exist?("CHANGELOG")
+      system('git add VERSION CHANGELOG')
+      system('git commit -a -m "Creating Version and Changelog version 0.0.1"')
+      system('git tag 0.0.1')
     end
 
   end

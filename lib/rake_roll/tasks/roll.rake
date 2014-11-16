@@ -46,7 +46,6 @@ namespace :roll do
   task :minor => :environment do
     roller = RakeRoll::Roller.new
     version = RakeRoll::Version.new(roller.current_version)
-    roller.new_version = version.minor
     if version
       roller.new_version = version.minor
       do_your_thing(roller, version, "minor")
@@ -59,7 +58,6 @@ namespace :roll do
   task :pre => :environment do
     roller = RakeRoll::Roller.new
     version = RakeRoll::Version.new(roller.current_version)
-    roller.new_version = version.pre
     if version
       roller.new_version = version.pre
       do_your_thing(roller, version, "pre")
@@ -67,6 +65,7 @@ namespace :roll do
       puts "ERROR: Invalid Version Number #{roller.current_version}"
     end
   end
+
 
 end
 
