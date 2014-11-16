@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Stuart Hanscombe"]
   spec.email         = ["hanscs1969@yahoo.co.uk"]
   spec.summary       = "RakeRoll: Git version tagger and changelog creator"
-  spec.description   = "RakeRoll: Will version and tag a release and create an updated changelog of the git commits, parsing only commits that are written in a simple markup structure"
+  spec.description   = "RakeRoll: Roll out your release versions with ease, RakeRoll will version and tag a release then create an updated changelog of the git commits (picking only those starting with a *)"
   spec.homepage      = "http://www.thelazycamel.com"
   spec.license       = "MIT"
 
