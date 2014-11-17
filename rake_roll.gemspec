@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "rake_roll"
-  spec.version       = "0.1.1"
+  spec.version       = "0.1.2"
   spec.authors       = ["Stuart Hanscombe"]
   spec.email         = ["hanscs1969@yahoo.co.uk"]
   spec.summary       = "RakeRoll: Git version tagger and changelog creator"

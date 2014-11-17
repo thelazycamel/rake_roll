@@ -102,7 +102,8 @@ module RakeRoll
 
     def push_tag_and_branch
       puts "pushing tag and branch"
-      system("git push origin #{}")
+      system("git push origin #{@current_branch}")
+      system("git push --tags")
     end
 
     def format
