@@ -1,6 +1,6 @@
 # RakeRoll
 
-TODO: Write a gem description
+  RakeRoll: Roll out your release versions with ease, RakeRoll will version and tag a release then create an updated changelog of the git commits, picking only those starting with a *
 
 ## Installation
 

@@ -50,9 +50,7 @@ module RakeRoll
     end
 
     def parsed_git_log(tag=nil)
-      git_log(tag).split("\n").select{|line| line[0] == "*"}.collect do |line|
-        line.split(" | ").reverse.join(" | ")
-      end
+      git_log(tag).split("\n").select{|line| line[0] == "*"}
     end
 
     def push
@@ -108,7 +106,8 @@ module RakeRoll
     end
 
     def format
-      "--pretty=format:'%s | %an | %h'"
+      #"--pretty=format:'%s | %an | %h'"
+      "--pretty=format:'%s'"
     end
 
     def git_log(tag=nil)
