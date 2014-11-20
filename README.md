@@ -44,6 +44,11 @@ Or install it yourself as:
     * Feature: #1111 Adding rake_roll to the Gemfile
     * HotFix: Don't Delete current users
 
+  FILES
+
+    rake roll will create a VERSION and CHANGELOG file on the root of
+    your project if they do not already exist.
+
   TODO
 
     Write tests
