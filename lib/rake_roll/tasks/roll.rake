@@ -22,7 +22,7 @@ namespace :roll do
   task :bump => :environment do
     roller = RakeRoll::Roller.new
     version = RakeRoll::Versioning.new(roller.current_version)
-    if version
+    if version.current_version
       roller.new_version = version.bump
       do_your_thing(roller, version, "bump")
     else
@@ -34,7 +34,7 @@ namespace :roll do
   task :major => :environment do
     roller = RakeRoll::Roller.new
     version = RakeRoll::Versioning.new(roller.current_version)
-    if version
+    if version.current_version
       roller.new_version = version.major
       do_your_thing(roller, version, "major")
     else
@@ -46,7 +46,7 @@ namespace :roll do
   task :minor => :environment do
     roller = RakeRoll::Roller.new
     version = RakeRoll::Versioning.new(roller.current_version)
-    if version
+    if version.current_version
       roller.new_version = version.minor
       do_your_thing(roller, version, "minor")
     else
@@ -58,7 +58,7 @@ namespace :roll do
   task :pre => :environment do
     roller = RakeRoll::Roller.new
     version = RakeRoll::Versioning.new(roller.current_version)
-    if version
+    if version.current_version
       roller.new_version = version.pre
       do_your_thing(roller, version, "pre")
     else
