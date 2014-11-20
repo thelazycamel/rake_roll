@@ -20,11 +20,11 @@ Or install it yourself as:
 
   rake roll
 
-  rake roll                        # shows version and all options
-  rake roll:pre                    # Bump to 0.1.0a
-  rake roll:bump                   # Bump to 0.1.1
-  rake roll:major                  # Bump to 1.0.0
-  rake roll:minor                  # Bump to 0.2.0
+    rake roll                        # shows version and all options
+    rake roll:pre                    # Bump to 0.1.0a
+    rake roll:bump                   # Bump to 0.1.1
+    rake roll:major                  # Bump to 1.0.0
+    rake roll:minor                  # Bump to 0.2.0
 
   The above will do a dry run, and show the changelog updates in the
   terminal window
