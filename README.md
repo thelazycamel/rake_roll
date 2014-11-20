@@ -36,14 +36,6 @@ Or install it yourself as:
 
     rake roll:bump PUSH=true
 
-  INITIAL SETUP
-
-    Create a VERSION file with the tag 0.0.1 (and git tag 0.0.1) if a
-    version file does not already exist, it will then create CHANGELOG
-    file if one does not already exist, use:
-
-    rake roll:build
-
   CHANGELOG
 
     Only commits starting with * will be added to the changelog, example:
