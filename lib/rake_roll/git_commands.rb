@@ -3,6 +3,7 @@ module RakeRoll
   module GitCommands
 
     def get_current_branch
+      #run as a direct command to retrieve the output
       `git rev-parse --abbrev-ref HEAD`.chomp
     end
 
@@ -17,7 +18,8 @@ module RakeRoll
     end
 
     def git_log(log_type)
-      system("git log #{log_type}")
+      #run as a direct command to retrieve the output
+      `git log #{log_type}`
     end
 
     def git_add(file)
