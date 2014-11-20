@@ -1,6 +1,8 @@
 module RakeRoll
   class Roller
 
+    include GitCommands
+
     attr_reader :current_version, :current_branch
     attr_accessor :new_version
 
@@ -20,7 +22,7 @@ module RakeRoll
     end
 
     def current_branch
-      @current_branch ||= `git rev-parse --abbrev-ref HEAD`.chomp
+      @current_branch ||= get_current_branch
     end
 
     def new_version
@@ -31,9 +33,7 @@ module RakeRoll
       puts "----------------------"
       puts "CHANGELOG"
       puts parsed_git_log
-      if parsed_git_log.empty?
-        puts "WARNING: no new CHANGELOG commits added"
-      end
+      puts "WARNING: no new CHANGELOG commits added" if parsed_git_log.empty?
       puts "----------------------"
     end
 
@@ -50,25 +50,26 @@ module RakeRoll
     end
 
     def parsed_git_log(tag=nil)
-      git_log(tag).split("\n").select{|line| line[0] == "*"}
+      tag ||= current_branch
+      log_type = "#{current_version}..#{tag} --pretty=format:'%s'"
+      git_log(log_type).split("\n").select{|line| line[0] == "*"}
     end
 
     def push
       puts "Rake Rolling..."
-      if parsed_git_log.empty?
-        puts "WARNING: no new CHANGELOG commits added"
-      end
-      update_version
+      puts "WARNING: no new CHANGELOG commits added" if parsed_git_log.empty?
+      update_version_file
       update_changelog
-      commit_changes
-      update_tag
-      push_tag_and_branch
+      git_commit("Updating Version to #{new_version}")
+      git_tag(new_version)
+      git_push_branch(@current_branch)
+      git_push_tags
       puts RakeRoll::Never.new.line
     end
 
     private
 
-    def update_version
+    def update_version_file
       puts "updating version to #{new_version}"
       File.open("VERSION", "w") {|f| f.write(new_version) }
     end
@@ -90,38 +91,13 @@ module RakeRoll
       system("mv changelog.tmp CHANGELOG")
     end
 
-    def commit_changes
-      puts "committing changes"
-      system("git commit -a -m 'Updating Version to #{new_version}'")
-    end
-
-    def update_tag
-      puts "updating tag to #{new_version}"
-      system("git tag #{new_version}")
-    end
-
-    def push_tag_and_branch
-      puts "pushing tag and branch"
-      system("git push origin #{@current_branch}")
-      system("git push --tags")
-    end
-
-    def format
-      #"--pretty=format:'%s | %an | %h'"
-      "--pretty=format:'%s'"
-    end
-
-    def git_log(tag=nil)
-      tag ||= current_branch
-      `git log #{current_version}..#{tag} #{format}`
-    end
-
     def build_version
       File.open("VERSION", "w") {|f| f.write("0.0.1") }
       File.open("CHANGELOG", "w") {|f| f.write("0.0.1") } unless File.exist?("CHANGELOG")
-      system('git add VERSION CHANGELOG')
-      system('git commit -a -m "Creating Version and Changelog version 0.0.1"')
-      system('git tag 0.0.1')
+      git_add("VERSION")
+      git_add("CHANGELOG")
+      git_commit("Creating Version and Changelog version 0.0.1")
+      git_tag("0.0.1")
     end
 
   end

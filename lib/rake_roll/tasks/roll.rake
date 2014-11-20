@@ -1,6 +1,6 @@
 task :roll => :environment do
   roller = RakeRoll::Roller.new
-  version = RakeRoll::Version.new(roller.current_version)
+  version = RakeRoll::Versioning.new(roller.current_version)
   puts "----------------------"
   puts "rake roll options are:"
   puts "----------------------"
@@ -18,10 +18,10 @@ end
 desc "bump the version, update the tag and changelog"
 namespace :roll do
 
-  desc "#{RakeRoll::Roller.new.current_version} => #{RakeRoll::Version.new(RakeRoll::Roller.new.current_version).bump}"
+  desc "#{RakeRoll::Roller.new.current_version} => #{RakeRoll::Versioning.new(RakeRoll::Roller.new.current_version).bump}"
   task :bump => :environment do
     roller = RakeRoll::Roller.new
-    version = RakeRoll::Version.new(roller.current_version)
+    version = RakeRoll::Versioning.new(roller.current_version)
     if version
       roller.new_version = version.bump
       do_your_thing(roller, version, "bump")
@@ -30,10 +30,10 @@ namespace :roll do
     end
   end
 
-  desc "#{RakeRoll::Roller.new.current_version} => #{RakeRoll::Version.new(RakeRoll::Roller.new.current_version).major}"
+  desc "#{RakeRoll::Roller.new.current_version} => #{RakeRoll::Versioning.new(RakeRoll::Roller.new.current_version).major}"
   task :major => :environment do
     roller = RakeRoll::Roller.new
-    version = RakeRoll::Version.new(roller.current_version)
+    version = RakeRoll::Versioning.new(roller.current_version)
     if version
       roller.new_version = version.major
       do_your_thing(roller, version, "major")
@@ -42,10 +42,10 @@ namespace :roll do
     end
   end
 
-  desc "#{RakeRoll::Roller.new.current_version} => #{RakeRoll::Version.new(RakeRoll::Roller.new.current_version).minor}"
+  desc "#{RakeRoll::Roller.new.current_version} => #{RakeRoll::Versioning.new(RakeRoll::Roller.new.current_version).minor}"
   task :minor => :environment do
     roller = RakeRoll::Roller.new
-    version = RakeRoll::Version.new(roller.current_version)
+    version = RakeRoll::Versioning.new(roller.current_version)
     if version
       roller.new_version = version.minor
       do_your_thing(roller, version, "minor")
@@ -54,10 +54,10 @@ namespace :roll do
     end
   end
 
-  desc "#{RakeRoll::Roller.new.current_version} => #{RakeRoll::Version.new(RakeRoll::Roller.new.current_version).pre}"
+  desc "#{RakeRoll::Roller.new.current_version} => #{RakeRoll::Versioning.new(RakeRoll::Roller.new.current_version).pre}"
   task :pre => :environment do
     roller = RakeRoll::Roller.new
-    version = RakeRoll::Version.new(roller.current_version)
+    version = RakeRoll::Versioning.new(roller.current_version)
     if version
       roller.new_version = version.pre
       do_your_thing(roller, version, "pre")
