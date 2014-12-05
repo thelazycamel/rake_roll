@@ -10,7 +10,7 @@ module RakeRoll
 
     def bump
       if nums = current_version.dup
-        last_number = nums[-1].scan(/\d/).first.to_i
+        last_number = nums[-1].scan(/\d+/).first.to_i
         last_number = last_number + 1
         nums[-1] = last_number
         nums.join(".")
@@ -32,7 +32,7 @@ module RakeRoll
 
     def minor
       if nums = current_version.dup
-        minor_number = nums[1].scan(/\d/).first.to_i
+        minor_number = nums[1].scan(/\d+/).first.to_i
         minor_number = minor_number + 1
         nums[1] = minor_number.to_s
         nums.last.gsub!(/\D/, "")
@@ -43,7 +43,7 @@ module RakeRoll
 
     def major
       if nums = current_version.dup
-        major_number = nums[0].scan(/\d/).first.to_i
+        major_number = nums[0].scan(/\d+/).first.to_i
         major_number = major_number + 1
         nums[0] = major_number
         nums[-1] = "0"

@@ -82,7 +82,27 @@ describe RakeRoll::Versioning do
     it "#pre should => 1.5.5a to 1.5.5b" do
       expect(RakeRoll::Versioning.new("1.5.5a").pre).to eq("1.5.5b")
     end
-    
+
+    it "#bump should => 1.10 to 1.11" do
+      expect(RakeRoll::Versioning.new("1.10").bump).to eq("1.11")
+    end
+
+    it "#bump should => 1.1.10 to 1.1.11" do
+      expect(RakeRoll::Versioning.new("1.1.10").bump).to eq("1.1.11")
+    end
+
+    it "#minor should => 1.10.1 to 1.11.11" do
+      expect(RakeRoll::Versioning.new("1.10.1").minor).to eq("1.11.0")
+    end
+
+    it "#major should => 10.1.0 to 11.0.0" do
+      expect(RakeRoll::Versioning.new("10.1.0").major).to eq("11.0.0")
+    end
+
+    it "#major should => 10.1 to 11.0" do
+      expect(RakeRoll::Versioning.new("10.1").major).to eq("11.0")
+    end
+
   end
 
 end
