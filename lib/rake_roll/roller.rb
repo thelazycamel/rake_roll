@@ -76,14 +76,15 @@ module RakeRoll
 
     def update_changelog
       puts "updating changelog"
-      text = [new_version]
+      version_and_date = "#{new_version} (#{Time.now.strftime("%d-%b-%y")})\n"
+      text = [version_and_date]
       parsed_git_log.reverse.each do |line|
         text << "\t#{line}"
       end
       original_file = "CHANGELOG"
       new_file = "changelog.tmp"
       File.open(new_file, "w") do |file|
-        file.puts text.join("\n")
+        file.puts version_and_date
         File.foreach(original_file) do |line|
           file.puts line
         end
