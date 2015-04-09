@@ -34,7 +34,7 @@ module RakeRoll
 
     def git_commit(message)
       puts "Commiting: #{message}"
-      system("git commit -a -m '#{message}'")
+      system("git commit CHANGELOG VERSION -m '#{message}'")
     end
 
   end
