@@ -7,5 +7,5 @@ require "rake_roll/roller"
 import File.join(File.dirname(__FILE__), "rake_roll/tasks/roll.rake")
 
 module RakeRoll
-
+  require 'rake_roll/railtie' if defined?(Rails)
 end
