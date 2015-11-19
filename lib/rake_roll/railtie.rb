@@ -1,6 +1,8 @@
 require 'rake_roll'
 require 'rails'
-module MyPlugin
+
+module RakeRoll
+
   class Railtie < Rails::Railtie
     railtie_name :rake_roll
 
@@ -8,4 +10,5 @@ module MyPlugin
       load "rake_roll/tasks/roll.rake"
     end
   end
+
 end
