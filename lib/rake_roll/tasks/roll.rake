@@ -1,3 +1,4 @@
+desc "Rolls out a release, updating tag and changelog, run to see options"
 task :roll => :environment do
   roller = RakeRoll::Roller.new
   puts "----------------------"
