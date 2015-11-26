@@ -1,7 +1,7 @@
 task :roll => :environment do
   roller = RakeRoll::Roller.new
-  version = RakeRoll::Versioning.new(roller.current_version)
   puts "----------------------"
+  version = RakeRoll::Versioning.new(roller.current_version)
   puts "rake roll options are:"
   puts "----------------------"
   puts "rake roll:bump            #{roller.current_version} => #{version.bump}"
