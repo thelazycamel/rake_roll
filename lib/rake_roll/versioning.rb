@@ -52,6 +52,10 @@ module RakeRoll
       end
     end
 
+    def test
+      'NEXT'
+    end
+
     private
 
     def validate_current_version(current)
