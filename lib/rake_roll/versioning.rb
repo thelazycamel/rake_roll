@@ -52,7 +52,7 @@ module RakeRoll
       end
     end
 
-    def next
+    def test
       'NEXT'
     end
 

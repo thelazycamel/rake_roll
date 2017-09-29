@@ -105,7 +105,11 @@ module RakeRoll
     end
 
     def next_version?
-      new_version == 'NEXT'
+      new_version == test_version
+    end
+
+    def test_version
+      RakeRoll::Versioning.new(current_version).test
     end
 
     def clean_changelog_next
@@ -115,7 +119,7 @@ module RakeRoll
       File.open(new_file, "w") do |file|
         in_next = false
         File.foreach(original_file) do |line|
-          in_next = true if line.start_with?("NEXT")
+          in_next = true if line.start_with?(test_version)
           in_next = false if line.start_with?(current_version)
           file.puts line unless in_next
         end
