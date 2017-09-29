@@ -58,12 +58,13 @@ module RakeRoll
     def push
       puts "Rake Rolling..."
       puts "WARNING: no new CHANGELOG commits added" if parsed_git_log.empty?
-      update_version_file
+      update_version_file unless next_version?
+      clean_changelog_next
       update_changelog
       git_commit("Updating Version to #{new_version}")
-      git_tag(new_version)
+      git_tag(new_version) unless next_version?
       git_push_branch(@current_branch)
-      git_push_tags
+      git_push_tags unless next_version?
       puts RakeRoll::Never.new.line
     end
 
@@ -103,5 +104,23 @@ module RakeRoll
       git_tag("0.0.1")
     end
 
+    def next_version?
+      new_version == 'NEXT'
+    end
+
+    def clean_changelog_next
+      puts "cleaning changelog"
+      original_file = "CHANGELOG"
+      new_file = "changelog.tmp"
+      File.open(new_file, "w") do |file|
+        in_next = false
+        File.foreach(original_file) do |line|
+          in_next = true if line.start_with?("NEXT")
+          in_next = false if line.start_with?(current_version)
+          file.puts line unless in_next
+        end
+      end
+      system("mv changelog.tmp CHANGELOG")
+    end
   end
 end

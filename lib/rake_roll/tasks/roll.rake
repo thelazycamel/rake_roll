@@ -9,6 +9,7 @@ task :roll => :environment do
   puts "rake roll:pre             #{roller.current_version} => #{version.pre}"
   puts "rake roll:minor           #{roller.current_version} => #{version.minor}"
   puts "rake roll:major           #{roller.current_version} => #{version.major}"
+  puts "rake roll:next            #{roller.current_version} => #{version.next} witout tagging"
   puts "----------------------"
   puts "Above will do a dry run, Run with PUSH=true to run for real"
   puts "----------------------"
@@ -62,6 +63,18 @@ namespace :roll do
     if version.current_version
       roller.new_version = version.pre
       do_your_thing(roller, version, "pre")
+    else
+      puts "ERROR: Invalid Version Number #{roller.current_version}"
+    end
+  end
+
+  desc "#{RakeRoll::Roller.new.current_version} => #{RakeRoll::Versioning.new(RakeRoll::Roller.new.current_version).next}"
+  task :next => :environment do
+    roller = RakeRoll::Roller.new
+    version = RakeRoll::Versioning.new(roller.current_version)
+    if version.current_version
+      roller.new_version = version.next
+      do_your_thing(roller, version, "next")
     else
       puts "ERROR: Invalid Version Number #{roller.current_version}"
     end
