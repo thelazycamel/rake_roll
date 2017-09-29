@@ -25,6 +25,7 @@ Or install it yourself as:
     rake roll:bump                   # Bump to 0.1.1
     rake roll:major                  # Bump to 1.0.0
     rake roll:minor                  # Bump to 0.2.0
+    rake roll:next                   # run and update changelog without creating a tag
 
   The above will do a dry run, and show the changelog updates in the
   terminal window
