@@ -3,14 +3,14 @@ describe RakeRoll::Versioning do
 
   it "should validate the version" do
     expect(RakeRoll::Versioning.new("1").current_version).to eq(false)
-  end 
+  end
 
   context "Dealing with 3 levels" do
 
     let(:version) { RakeRoll::Versioning.new("1.0.0") }
 
-    it "#bump should => 1.0.0 to 1.0.1" do
-      expect(version.bump).to eq("1.0.1")
+    it "#revision should => 1.0.0 to 1.0.1" do
+      expect(version.revision).to eq("1.0.1")
     end
 
     it "#pre should => 1.0.0 to 1.0.0a" do
@@ -31,8 +31,8 @@ describe RakeRoll::Versioning do
 
     let(:version) { RakeRoll::Versioning.new("1.0") }
 
-    it "#bump should => 1.0 to 1.1" do
-      expect(version.bump).to eq("1.1")
+    it "#revision should => 1.0 to 1.1" do
+      expect(version.revision).to eq("1.1")
     end
 
     it "#pre should => 1.0 to 1.0a" do
@@ -51,8 +51,8 @@ describe RakeRoll::Versioning do
 
   context "Other versioning cases" do
 
-    it "#bump should => 1.0a to 1.1" do
-      expect(RakeRoll::Versioning.new("1.0a").bump).to eq("1.1")
+    it "#revision should => 1.0a to 1.1" do
+      expect(RakeRoll::Versioning.new("1.0a").revision).to eq("1.1")
     end
 
     it "#major should => 1.5a to 2.0" do
@@ -67,8 +67,8 @@ describe RakeRoll::Versioning do
       expect(RakeRoll::Versioning.new("1.5a").pre).to eq("1.5b")
     end
 
-    it "#bump should => 1.0.0a to 1.0.1" do
-      expect(RakeRoll::Versioning.new("1.0.0a").bump).to eq("1.0.1")
+    it "#revision should => 1.0.0a to 1.0.1" do
+      expect(RakeRoll::Versioning.new("1.0.0a").revision).to eq("1.0.1")
     end
 
     it "#major should => 1.5.5a to 2.0.0" do
@@ -83,12 +83,12 @@ describe RakeRoll::Versioning do
       expect(RakeRoll::Versioning.new("1.5.5a").pre).to eq("1.5.5b")
     end
 
-    it "#bump should => 1.10 to 1.11" do
-      expect(RakeRoll::Versioning.new("1.10").bump).to eq("1.11")
+    it "#revision should => 1.10 to 1.11" do
+      expect(RakeRoll::Versioning.new("1.10").revision).to eq("1.11")
     end
 
-    it "#bump should => 1.1.10 to 1.1.11" do
-      expect(RakeRoll::Versioning.new("1.1.10").bump).to eq("1.1.11")
+    it "#revision should => 1.1.10 to 1.1.11" do
+      expect(RakeRoll::Versioning.new("1.1.10").revision).to eq("1.1.11")
     end
 
     it "#minor should => 1.10.1 to 1.11.11" do

@@ -39,7 +39,12 @@ module RakeRoll
 
     def print_run_for_real_text(type)
       log_to_s
-      puts "=> rake roll:#{type} PUSH=true (to run for real)"
+      puts "To run for real:"
+      if type == "bump"
+        puts "$> BUMP=#{new_version} PUSH=true rake roll:#{type}"
+      else
+        puts "$> PUSH=true rake roll:#{type}"
+      end
       puts "----------------------"
     end
 

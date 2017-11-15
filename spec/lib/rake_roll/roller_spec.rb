@@ -12,7 +12,7 @@ describe RakeRoll::Roller do
     expect(roller.new_version).to eq(RakeRoll::VERSION)
     roller.new_version = "3.0.0"
     expect(roller.new_version).to eq("3.0.0")
-  end 
+  end
 
   it "Should Roll out the changes" do
     #TODO Mock all those system calls

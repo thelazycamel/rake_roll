@@ -8,15 +8,6 @@ module RakeRoll
       @current_version = validate_current_version(current_version)
     end
 
-    def bump
-      if nums = current_version.dup
-        last_number = nums[-1].scan(/\d+/).first.to_i
-        last_number = last_number + 1
-        nums[-1] = last_number
-        nums.join(".")
-      end
-    end
-
     def pre
       if nums = current_version.dup
         pre_letter = nums[-1].scan(/\D/).first
@@ -26,6 +17,15 @@ module RakeRoll
         else
           nums[-1] = nums[-1] + "a"
         end
+        nums.join(".")
+      end
+    end
+
+    def revision
+      if nums = current_version.dup
+        last_number = nums[-1].scan(/\d+/).first.to_i
+        last_number = last_number + 1
+        nums[-1] = last_number
         nums.join(".")
       end
     end
@@ -52,7 +52,7 @@ module RakeRoll
       end
     end
 
-    def test
+    def next
       'NEXT'
     end
 
