@@ -6,7 +6,7 @@ require 'rake_roll/version'
 Gem::Specification.new do |spec|
   spec.name          = "rake_roll"
   spec.version       = RakeRoll::VERSION
-  spec.authors       = ["Stuart Hanscombe"]
+  spec.authors       = ["Stuart Hanscombe", "Jose Fuentes"]
   spec.email         = ["hanscs1969@yahoo.co.uk"]
   spec.summary       = "RakeRoll: Git version tagger and changelog creator"
   spec.description   = "RakeRoll: Roll out your release versions with ease, RakeRoll will version and tag a release then create an updated changelog of the git commits (picking only those starting with a *)"
