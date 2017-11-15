@@ -30,6 +30,15 @@ module RakeRoll
       end
     end
 
+    def bump_example
+      if nums = current_version.dup
+        last_number = nums[-1].scan(/\d+/).first.to_i
+        last_number = last_number + 5
+        nums[-1] = last_number
+        nums.join(".")
+      end
+    end
+
     def minor
       if nums = current_version.dup
         minor_number = nums[1].scan(/\d+/).first.to_i

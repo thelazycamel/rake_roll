@@ -10,7 +10,7 @@ task :roll => :environment do
   puts "rake roll:minor           #{roller.current_version} => #{version.minor}"
   puts "rake roll:major           #{roller.current_version} => #{version.major}"
   puts "rake roll:next            Writes latest commits to changelog without tagging or updating version"
-  puts "rake roll:bump            Pass bumped version in eg: BUMP=#{version.revision}"
+  puts "rake roll:bump            Pass bumped version in eg: BUMP=#{version.bump_example}"
   puts "----------------------"
   puts "Above will do a dry run, Run with PUSH=true to run for real"
   puts "----------------------"
