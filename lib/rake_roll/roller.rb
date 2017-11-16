@@ -114,7 +114,7 @@ module RakeRoll
     end
 
     def test_version
-      RakeRoll::Versioning.new(current_version).test
+      RakeRoll::Versioning.new(current_version).next
     end
 
     def clean_changelog_next
