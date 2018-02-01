@@ -57,7 +57,7 @@ module RakeRoll
     def parsed_git_log(tag=nil)
       tag ||= current_branch
       log_type = "#{current_version}..#{tag} --pretty=format:'%s'"
-      git_log(log_type).split("\n").select{|line| line[0] == "*"}
+      git_log(log_type).split("\n").select{|line| include_line?(line)}
     end
 
     def push
@@ -130,6 +130,12 @@ module RakeRoll
         end
       end
       system("mv changelog.tmp CHANGELOG")
+    end
+
+    private
+
+    def include_line?(line)
+      line.start_with?('*') || /^[0-9a-zA-Z\-_]{3,27} :: #[0-9]{4,6} :: .{5,}/.match(line)
     end
   end
 end
