@@ -39,7 +39,7 @@ Or install it yourself as:
 
   CHANGELOG
 
-    Only commits starting with * or match /^[0-9a-zA-Z\-_]{3,27} :: #[0-9]{4,6} :: .{5,}/ will be added to the changelog, example:
+    Only commits starting with *, 'Tech' or match /^@[0-9a-zA-Z\-_]{3,27} #[0-9]{4,6} .{5,}/ will be added to the changelog, example:
 
     * BugFix: #1234 IE6 Positioning fix
     * Feature: #1111 Adding rake_roll to the Gemfile
