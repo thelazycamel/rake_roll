@@ -41,7 +41,7 @@ module RakeRoll
       log_to_s
       puts "To run for real:"
       if type == "bump"
-        puts "$> BUMP=#{new_version} PUSH=true rake roll:#{type}"
+        puts "$> VERSION=#{new_version} PUSH=true rake roll:#{type}"
       else
         puts "$> PUSH=true rake roll:#{type}"
       end

@@ -22,9 +22,10 @@ Or install it yourself as:
 
     rake roll                        # shows version and all options
     rake roll:pre                    # Bump to 0.1.0a
-    rake roll:bump                   # Bump to 0.1.1
+    rake roll:revision               # Bump to 0.1.1
     rake roll:major                  # Bump to 1.0.0
     rake roll:minor                  # Bump to 0.2.0
+    rake roll:bump                   # pass VERSION=*.*.* to create manual version number
     rake roll:next                   # run and update changelog without creating a tag
 
   The above will do a dry run, and show the changelog updates in the
@@ -39,11 +40,17 @@ Or install it yourself as:
 
   CHANGELOG
 
-    Only commits starting with *, 'Tech' or match /^@[0-9a-zA-Z\-_]{3,27} #[0-9]{4,6} .{5,}/ will be added to the changelog, example:
+    Only commits starting with *, 'Tech' or matching regex /^@[0-9a-zA-Z\-_]{3,27} #[0-9]{4,6} .{5,}/ will be added to the changelog, example:
 
     * BugFix: #1234 IE6 Positioning fix
     * Feature: #1111 Adding rake_roll to the Gemfile
     * HotFix: Don't Delete current users
+
+    or
+
+    @assembla-space :: #1234 :: Assembla style ticket heading
+    @assembla-space :: #2345 :: Put what you want here
+    @assembla-space :: #4567 :: Some title
 
   FILES
 

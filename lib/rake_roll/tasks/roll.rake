@@ -10,7 +10,7 @@ task :roll => :environment do
   puts "rake roll:minor           #{roller.current_version} => #{version.minor}"
   puts "rake roll:major           #{roller.current_version} => #{version.major}"
   puts "rake roll:next            Writes latest commits to changelog without tagging or updating version"
-  puts "rake roll:bump            Pass bumped version in eg: BUMP=#{version.bump_example}"
+  puts "rake roll:bump            Pass bumped version in eg: VERSION=#{version.bump_example}"
   puts "----------------------"
   puts "Above will do a dry run, Run with PUSH=true to run for real"
   puts "----------------------"
@@ -81,11 +81,11 @@ namespace :roll do
     end
   end
 
-  desc "#{RakeRoll::Roller.new.current_version} => Pass bumped version in eg: BUMP=1.2.3"
+  desc "#{RakeRoll::Roller.new.current_version} => Pass bumped version in eg: VERSION=1.2.3"
   task :bump => :environment do
     roller = RakeRoll::Roller.new
     version = RakeRoll::Versioning.new(roller.current_version)
-    if new_version = ENV["BUMP"]
+    if new_version = ENV["VERSION"]
       if version.current_version
         roller.new_version = new_version
         do_your_thing(roller, version, "bump")
@@ -93,7 +93,7 @@ namespace :roll do
         puts "ERROR: Invalid Version Number #{roller.current_version}"
       end
     else
-      puts "You must supply a version number i.e. BUMP=#{version.revision} rake roll:bump"
+      puts "You must supply a version number i.e. VERSION=#{version.revision} rake roll:bump"
     end
   end
 
