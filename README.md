@@ -48,9 +48,9 @@ Or install it yourself as:
 
     or
 
-    @assembla-space :: #1234 :: Assembla style ticket heading
-    @assembla-space :: #2345 :: Put what you want here
-    @assembla-space :: #4567 :: Some title
+    @assembla-space #1234 Assembla style ticket heading
+    @assembla-space #2345 Put what you want here
+    @assembla-space #4567 Some title
 
   FILES
 

@@ -9,6 +9,7 @@ module RakeRoll
     end
 
     def pre
+      return unless current_version
       if nums = current_version.dup
         pre_letter = nums[-1].scan(/\D/).first
         if pre_letter
@@ -22,6 +23,7 @@ module RakeRoll
     end
 
     def revision
+      return unless current_version
       if nums = current_version.dup
         last_number = nums[-1].scan(/\d+/).first.to_i
         last_number = last_number + 1
@@ -31,6 +33,7 @@ module RakeRoll
     end
 
     def bump_example
+      return unless current_version
       if nums = current_version.dup
         last_number = nums[-1].scan(/\d+/).first.to_i
         last_number = last_number + 5
@@ -40,6 +43,7 @@ module RakeRoll
     end
 
     def minor
+      return unless current_version
       if nums = current_version.dup
         minor_number = nums[1].scan(/\d+/).first.to_i
         minor_number = minor_number + 1
@@ -51,6 +55,7 @@ module RakeRoll
     end
 
     def major
+      return unless current_version
       if nums = current_version.dup
         major_number = nums[0].scan(/\d+/).first.to_i
         major_number = major_number + 1
@@ -68,6 +73,7 @@ module RakeRoll
     private
 
     def validate_current_version(current)
+      return unless current
       splits = current.split(".")
       splits.size < 2 || splits.size > 3 ? false : splits
     end
