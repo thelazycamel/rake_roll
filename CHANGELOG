@@ -1,0 +1,2 @@
+2.0.3
+	Tech: small fix for when current_version nil
