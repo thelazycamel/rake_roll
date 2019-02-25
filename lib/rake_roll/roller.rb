@@ -135,7 +135,7 @@ module RakeRoll
     private
 
     def include_line?(line)
-      line.start_with?('*') || line.start_with?('Tech') || /^@[0-9a-zA-Z\-_]{3,27} #[0-9]{4,6} .{5,}/.match(line)
+      line.start_with?('*') || line.start_with?('Tech') || /^@[0-9a-zA-Z\-_]{1,27} #[0-9]{4,6} .{5,}/.match(line)
     end
   end
 end
