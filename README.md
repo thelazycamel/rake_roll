@@ -51,6 +51,7 @@ Or install it yourself as:
     @assembla-space #1234 Assembla style ticket heading
     @assembla-space #2345 Put what you want here
     @assembla-space #4567 Some title
+    space-4567: Some Message
 
   FILES
 
