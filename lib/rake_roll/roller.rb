@@ -135,7 +135,7 @@ module RakeRoll
     private
 
     def include_line?(line)
-      line.start_with?('*') || line.downcase.start_with?("hotfix") || line.downcase.start_with?("bugfix") || line.downcase.start_with?('tech') || /^@[0-9a-zA-Z\-_]{2,27} #[0-9a-zA-Z\-_]*[0-9]{1,6} .{5,}/.match(line)
+      line.start_with?('*') || line.downcase.start_with?("hotfix") || line.downcase.start_with?("bugfix") || line.downcase.start_with?('tech') || /(^[A-Z]{1,6}\-\d{1,6})/.match(line) || /^@[0-9a-zA-Z\-_]{2,27} #[0-9a-zA-Z\-_]*[0-9]{1,6} .{5,}/.match(line)
     end
   end
 end
